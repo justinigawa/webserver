@@ -1,31 +1,30 @@
-//Lets require/import the HTTP module
 var http = require('http');
 
-//Lets define a port we want to listen to
-var PORT1=7000;
-var PORT2=7050;
+var PORT1 = 7000;
+var PORT2 = 7500;
 
-//We need a function which handles requests and send response
+var goodPhrases = ['You are sooo good looking!', 'Boy are you smart!', 'I wish I were as cool as you!'];
+var badPhrases = ['You need a new face!', 'Dumb people call you dumb!', 'If you were the last person on earth, you still would not be one of the cool ones!'];
+var good = goodPhrases[Math.floor(Math.random()*goodPhrases.length)];
+var bad = badPhrases[Math.floor(Math.random()*goodPhrases.length)];
+
+
 function handleRequest1(request, response){
-    response.end('You are awesome~ ' + request.url);
-}
-//We need a function which handles requests and send response
-function handleRequest2(request, response){
-    response.end('You suck~ ' + request.url);
-}
+	response.end(good);
+};
 
-//Create a server
+function handleRequest2(request, response){
+	response.end(bad);
+};
+
 var server1 = http.createServer(handleRequest1);
-//Create a server
+
 var server2 = http.createServer(handleRequest2);
 
-//Lets start our server
 server1.listen(PORT1, function(){
-    //Callback triggered when server is successfully listening. Hurray!
-    console.log("Server listening on: http://localhost:%s", PORT1);
+	console.log("Server listening on: http://localhost:%s", PORT1);
 });
 
 server2.listen(PORT2, function(){
-    //Callback triggered when server is successfully listening. Hurray!
-    console.log("Server listening on: http://localhost:%s", PORT2);
+	console.log("Server listening on: http://localhost:%s", PORT2);
 });
